@@ -1,0 +1,20 @@
+Config { font = "xft:consolas:pixelsize=18:autohint=true:antialias=true"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red","-w","3"] 10
+                    , Run ThermalZone 0 ["-t","<temp>°C","-L","60","-H","79","-h","red","-n","yellow","-l","green"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%","-L","60","-H","90","-h","red","-n","yellow","-l","green","-w","2"] 10
+                    , Run Wireless "wlan0" ["-t","<essid>"] 10
+		            , Run DynNetwork ["-t","<rx>K / <tx>K","-w","3"] 10
+                    , Run StdinReader
+                    , Run Date "%_d %H:%M" "date" 10
+                    , Run Battery ["-t","<left>% / <timeleft>","-L","20","-H","75","-h","green","-n","yellow","-l","red","--","-l","red"] 10
+                    , Run Volume "default" "Master" ["-t", "<dB>dB"] 10
+                    , Run Kbd [("ru", "RU"), ("us", "US")]
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%multicpu% %thermal0% %memory% | %wlan0wi% : %dynnetwork% | %StdinReader% }{ <fc=#ee9a00>%date%</fc> | %default:Master% | %battery% | <fc=#009aee>%kbd%</fc>        "
+}
